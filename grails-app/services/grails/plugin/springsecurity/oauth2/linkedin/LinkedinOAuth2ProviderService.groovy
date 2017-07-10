@@ -50,17 +50,17 @@ class LinkedinOAuth2ProviderService extends OAuth2AbstractProviderService {
         def response =  oAuthRequest.send()
         try {
             println "JSON response body: " + accessToken.rawResponse
-            user = JSON.parse(response.body)?.data
+            user = JSON.parse(response.body)
             println "Usuário: $user"
             println "Response: $response.body"
         } catch (Exception exception) {
             log.error("Error parsing response from " + getProviderID() + ". Response:\n" + response.body)
             throw new OAuth2Exception("Error parsing response from " + getProviderID(), exception)
         }
-        if (!user?.username) {
+        if (!user?.emailAddress) {
             log.error("No user email from " + getProviderID() + ". Response was:\n" + response.body)
             throw new OAuth2Exception("No user email from " + getProviderID())
         }
-        new LinkedinOauth2SpringToken(accessToken, user?.username, providerID)
+        new LinkedinOauth2SpringToken(accessToken, user?.emailAddress, providerID)
     }
 }

@@ -9,7 +9,7 @@ buildscript {
     }
 }
 
-version "0.1"
+version "0.1.0"
 group "spring.security.oauth2.linkedin"
 
 apply plugin:"eclipse"
@@ -45,6 +45,10 @@ dependencies {
     profile "org.grails.profiles:web-plugin"
     provided "org.grails:grails-plugin-services"
     provided "org.grails:grails-plugin-domain-class"
+
+    provided 'org.grails.plugins:spring-security-core:3.+'
+    provided 'org.grails.plugins:spring-security-oauth2:1.1.+'
+
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.8.2"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"

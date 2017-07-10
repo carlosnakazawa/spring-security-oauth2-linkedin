@@ -2,6 +2,9 @@ package grails.plugin.springsecurity.oauth2.linkedin
 
 import com.github.scribejava.core.builder.api.DefaultApi20
 import com.github.scribejava.core.model.OAuth2AccessToken
+import com.github.scribejava.core.model.OAuthConstants
+import com.github.scribejava.core.model.OAuthRequest
+import com.github.scribejava.core.model.Verb
 import grails.converters.JSON
 import grails.plugin.springsecurity.oauth2.exception.OAuth2Exception
 import grails.plugin.springsecurity.oauth2.service.OAuth2AbstractProviderService
@@ -23,23 +26,28 @@ class LinkedinOAuth2ProviderService extends OAuth2AbstractProviderService {
 
     @Override
     String getProfileScope() {
-        return "https://api.linkedin.com/v1/people/~?format=json"
+        return "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url)?format=json"
     }
 
     @Override
     String getScopes() {
-        return ""
+        return "r_basicprofile r_emailaddress"
     }
 
     @Override
     String getScopeSeparator() {
-        return ","
+        return " "
     }
 
     @Override
     OAuth2SpringToken createSpringAuthToken(OAuth2AccessToken accessToken) {
         def user
-        def response = getResponse(accessToken)
+//        def response = getResponse(accessToken)
+        OAuthRequest oAuthRequest = new OAuthRequest(Verb.GET, getProfileScope(), authService)
+        oAuthRequest.addHeader(OAuthConstants.HEADER,
+                'Bearer '
+                        + accessToken.accessToken);
+        def response =  oAuthRequest.send()
         try {
             println "JSON response body: " + accessToken.rawResponse
             user = JSON.parse(response.body)?.data

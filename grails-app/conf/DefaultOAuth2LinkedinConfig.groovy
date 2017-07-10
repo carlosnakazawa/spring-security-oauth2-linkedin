@@ -4,7 +4,7 @@
 security {
     oauth2 {
         providers {
-            instagram {
+            linkedin {
                 successUri = "/oauth2/linkedin/success"
                 failureUri = "/oauth2/linkedin/failure"
                 callback = "/oauth2/linkedin/callback"

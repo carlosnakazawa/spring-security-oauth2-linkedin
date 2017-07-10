@@ -18,22 +18,22 @@ class LinkedinOAuth2ProviderService extends OAuth2AbstractProviderService {
 
     @Override
     Class<? extends DefaultApi20> getApiClass() {
-        Instagram2Api.class
+        Linkedin2Api.class
     }
 
     @Override
     String getProfileScope() {
-        return "https://api.instagram.com/v1/users/self"
+        return "https://api.linkedin.com/v1/people/~?format=json"
     }
 
     @Override
     String getScopes() {
-        return "basic"
+        return ""
     }
 
     @Override
     String getScopeSeparator() {
-        return "+"
+        return ","
     }
 
     @Override
@@ -53,6 +53,6 @@ class LinkedinOAuth2ProviderService extends OAuth2AbstractProviderService {
             log.error("No user email from " + getProviderID() + ". Response was:\n" + response.body)
             throw new OAuth2Exception("No user email from " + getProviderID())
         }
-        new InstagramOauth2SpringToken(accessToken, user?.username, providerID)
+        new LinkedinOauth2SpringToken(accessToken, user?.username, providerID)
     }
 }

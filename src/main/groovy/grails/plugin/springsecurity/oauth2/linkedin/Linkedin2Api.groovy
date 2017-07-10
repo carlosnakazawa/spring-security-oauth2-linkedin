@@ -4,6 +4,8 @@ import com.github.scribejava.core.builder.api.DefaultApi20
 
 class Linkedin2Api extends DefaultApi20 {
 
+    private static final String AUTHORIZATION_BASE_URL = "https://www.linkedin.com/oauth/v2/authorization"
+
     protected Linkedin2Api() {
     }
 
@@ -18,7 +20,7 @@ class Linkedin2Api extends DefaultApi20 {
 
     @Override
     String getAccessTokenEndpoint() {
-        return "https://api.instagram.com/oauth/access_token";
+        return "https://www.linkedin.com/oauth/v2/accessToken";
     }
 
     @Override

@@ -63,16 +63,13 @@ bootRun {
 // enable if you wish to package this plugin as a standalone application
 bootRepackage.enabled = false
 grailsPublish {
-    // TODO: Provide values here
-    user = 'user'
-    key = 'key'
-    githubSlug = 'foo/bar'
+    githubSlug = 'carlosnakazawa'
     license {
         name = 'Apache-2.0'
     }
-    title = "My Plugin"
+    title = "Spring Security OAuth 2 Linkedin"
     desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
+    developers = [nakazawa:"Carlos Alberto Nakazawa"]
     portalUser = ""
     portalPassword = ""    
 }
